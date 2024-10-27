@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Assign Record</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Record: {{ record.first_name }} {{ record.last_name }}</label>
+                            <select name="user_id" class="form-select">
+                                <option value="">Select User</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}">{{ user.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Assign Record</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

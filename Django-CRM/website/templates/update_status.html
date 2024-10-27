@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Update Record Status</h2>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="mb-4">
+                        <h5>Record Details:</h5>
+                        <p class="mb-1"><strong>Name:</strong> {{ record.first_name }} {{ record.last_name }}</p>
+                        <p class="mb-1"><strong>Email:</strong> {{ record.email }}</p>
+                        <p class="mb-1"><strong>Current Status:</strong> {{ record.get_status_display }}</p>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">New Status</label>
+                            {{ form.status }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Update Status</button>
+                            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
